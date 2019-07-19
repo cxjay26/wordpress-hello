@@ -10,3 +10,6 @@ $typeManager = new \WPAS\Types\PostTypesManager([ 'namespace' => 'Rigo\\Types\\'
 */
 $typeManager->newType(['type' => 'course', 'class' => 'Course'])->register();
 
+$typeManager->newType(['type' => 'book', 'class' => 'Book'])->register();
+
+
