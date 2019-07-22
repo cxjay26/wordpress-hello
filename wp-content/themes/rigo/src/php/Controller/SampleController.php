@@ -26,16 +26,11 @@ class SampleController{
                         $query->the_post();
                         //Include the Meta Tags and Values
                         $query->post->meta_keys = get_post_meta($query->post->ID);
-                        // $query->post->image = wp_get_attachment_image_src(get_field("image",$query->post->ID))[0];
+                        // $query->post->image = get_field("image",$query->post->ID);
                     }
                 }
                 return $query->posts;
             }
-
-        public function createBook($data){
-            $message = "thanks for submitting "+$data["name"];
-            return $message;
-    }
-
 }
+
 ?>
