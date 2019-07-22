@@ -17,5 +17,8 @@ $api->get([ 'path' => '/courses', 'controller' => 'SampleController:getDraftCour
 
 $api->get([ 'path' => '/books', 'controller' => 'SampleController:getDraftBooks' ]);
 
-$api->get([ 'path' => '/books/create', 'controller' => 'SampleController:createBook' ]);
+$api->get([ 'path' => '/locations', 'controller' => 'SampleController:getDraftLocations' ]);
+
+$api->post([ 'path' => '/locations/create', 'controller' => 'SampleController:createLocations' ]);
+
 
