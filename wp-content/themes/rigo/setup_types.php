@@ -14,4 +14,6 @@ $typeManager->newType(['type' => 'book', 'class' => 'Book'])->register();
 
 $typeManager->newType(['type'=> 'location', 'class' => 'Location'])->register();
 
+$typeManager->newType(['type'=> 'comment', 'class' => 'Comment'])->register();
+
 

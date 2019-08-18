@@ -4,6 +4,8 @@ namespace Rigo\Controller;
 use Rigo\Types\Course;
 use Rigo\Types\Book;
 use Rigo\Types\Location;
+use Rigo\Types\Comment;
+
 
 class SampleController{
 
@@ -17,34 +19,51 @@ class SampleController{
         $query = Course::all([ 'status' => 'draft' ]);
         return $query->posts;
     }
-    public function getDraftLocations(){
-        $query = Location::all([ 'status' => 'draft' ]);
-        return $query->posts;
-    }
-    public function createLocations($data){
+    // public function createCommentss($data){
+    //     $post_arr = array(
+    //         "post_title" => $data["post_title"],
+    //         "post_content" => $data["post_content"],
+    //         "post_type" => "location",
+    //         "post_status" => "publish",
+    //         "post_author" => get_current_user_id(),
+    //         "meta_input" => array(
+    //             "location_address" => $data["location_address"],
+    //             "location_menu" => $data["location_menu"],
+    //             "location_description" => $data["location_description"],
+    //             "location_review" => $data["location_review"],
+    //             "location_hours" => $data["location_hours"],
+    //             "location_" => $data["location_"],
+    //             "category" => $data["category"],
+    //             "image_01" => $data["image_01"]
+    //             ),
+
+    //         );
+
+    //    wp_insert_post($post_arr, $wp_error=true);
+
+    //     return ["post added successfully"];
+    // }
+
+    public function createBook($data){
         $post_arr = array(
             "post_title" => $data["post_title"],
             "post_content" => $data["post_content"],
-            "post_type" => "location",
+            "post_type" => "book",
             "post_status" => "publish",
             "post_author" => get_current_user_id(),
             "meta_input" => array(
-                "location_address" => $data["location_address"],
-                "location_menu" => $data["location_menu"],
-                "location_description" => $data["location_description"],
-                "location_review" => $data["location_review"],
-                "location_hours" => $data["location_hours"],
-                "location_" => $data["location_"],
-                "category" => $data["category"],
-                "image_01" => $data["image_01"]
+                "title" => $data["title"],
+                "author" => $data["author"]
+               // "product_price" => $data["product_price"],
+                //"product_description" => $data["product_description"],
+               // "category" => $data["category"],
+              //  "image_01" => $data["image_01"]
                 ),
-
             );
-
        wp_insert_post($post_arr, $wp_error=true);
-
         return ["post added successfully"];
     }
+
         public function getDraftBooks(){
         // $query = Book::all([ 'status' => 'draft' ]);
         // return $query->posts;
@@ -59,6 +78,51 @@ class SampleController{
                 }
                 return $query->posts;
             }
+            public function getDraftLocations(){
+                // Define Arguments
+                $args = array(
+                    'post_type' => 'location',
+                );
+                // Run Query Using get_posts
+                $posts = get_posts($args);
+                // loop posts and expose acf fields
+                foreach ($posts as $key => $post) {
+                        $posts[$key]->acf = get_fields($post->ID);
+                }
+                return $posts;
+            }
+            public function getDraftComments(){
+                // Define Arguments
+                $args = array(
+                    'post_type' => 'comment',
+                );
+                // Run Query Using get_posts
+                $posts = get_posts($args);
+                // loop posts and expose acf fields
+                foreach ($posts as $key => $post) {
+                        $posts[$key]->acf = get_fields($post->ID);
+                }
+                return $posts;
+            }
+            public function createComment($data){
+                    $post_arr = array(
+                        "post_title" => $data["post_title"],
+                        "post_content" => $data["post_content"],
+                        "post_type" => "comment",
+                        "post_status" => "publish",
+                        "post_author" => get_current_user_id(),
+                        "meta_input" => array(
+                            "comment" =>$data["comment"]
+
+                        // "product_price" => $data["product_price"],
+                            //"product_description" => $data["product_description"],
+                        // "category" => $data["category"],
+                        //  "image_01" => $data["image_01"]
+                            ),
+                        );
+                wp_insert_post($post_arr, $wp_error=true);
+                    return ["post added successfully"];
+                }
 }
 
 ?>
