@@ -95,6 +95,7 @@ class SampleController{
                 // Define Arguments
                 $args = array(
                     'post_type' => 'comment',
+                    'numberposts' => -1
                 );
                 // Run Query Using get_posts
                 $posts = get_posts($args);
@@ -107,22 +108,20 @@ class SampleController{
             public function createComment($data){
                     $post_arr = array(
                         "post_title" => $data["post_title"],
-                        "post_content" => $data["post_content"],
+                        "post_content" => "",
                         "post_type" => "comment",
                         "post_status" => "publish",
                         "post_author" => get_current_user_id(),
-                        "meta_input" => array(
-                            "comment" =>$data["comment"]
+                    );
+                    $post = wp_insert_post($post_arr, $wp_error=true);
 
-                        // "product_price" => $data["product_price"],
-                            //"product_description" => $data["product_description"],
-                        // "category" => $data["category"],
-                        //  "image_01" => $data["image_01"]
-                            ),
-                        );
-                wp_insert_post($post_arr, $wp_error=true);
+                    $comment=$data["comment"];
+                    $bar_id=$data["bar_id"];
+                    update_field("comment",$comment,$post);
+                    update_field("bar_id",$bar_id,$post);
                     return ["post added successfully"];
                 }
+
 }
 
 ?>
