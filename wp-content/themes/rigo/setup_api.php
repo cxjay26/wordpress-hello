@@ -24,3 +24,5 @@ $api->get([ 'path' => '/locations', 'controller' => 'SampleController:getDraftLo
 $api->get([ 'path' => '/comments', 'controller' => 'SampleController:getDraftComments' ]);
 
 $api->post([ 'path' => '/comments/create', 'controller' => 'SampleController:createComment' ]);
+
+

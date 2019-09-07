@@ -121,7 +121,18 @@ class SampleController{
                     update_field("bar_id",$bar_id,$post);
                     return ["post added successfully"];
                 }
-
+            public function getDraftUsers(){
+                // Define Arguments
+                $args = array(
+                    'post_type' => 'user',
+                );
+                // Run Query Using get_posts
+                $posts = get_posts($args);
+                // loop posts and expose acf fields
+                foreach ($posts as $key => $post) {
+                        $posts[$key]->acf = get_fields($post->ID);
+                }
+                return $posts;
+            }
 }
-
 ?>
